@@ -68,6 +68,9 @@ function auth_outage_get_climaintenance_resource_file($file) {
 /**
  * Inject the warning bar into the page if there is currently an outage.
  *
+ * This is a legacy callback that is used for compatibility with older Moodle versions.
+ * Moodle 4.4+ will use auth_outage\hook_callbacks::before_standard_top_of_body_html_generation instead.
+ *
  * @return string|void
  */
 function auth_outage_before_standard_top_of_body_html() {
