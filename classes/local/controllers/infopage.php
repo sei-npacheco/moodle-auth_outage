@@ -14,15 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * infopage class.
- *
- * @package    auth_outage
- * @author     Daniel Thee Roperto <daniel.roperto@catalyst-au.net>
- * @copyright  2016 Catalyst IT
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 namespace auth_outage\local\controllers;
 
 use auth_outage\dml\outagedb;
@@ -53,9 +44,9 @@ class infopage {
 
     /**
      * infopage_controller constructor.
-     * @param array $params Parameters to use or null to get from Moodle API (request).
+     * @param array|null $params Parameters to use or null to get from Moodle API (request).
      */
-    public function __construct(array $params = null) {
+    public function __construct(?array $params = null) {
         global $CFG;
         // Enable SVG support here to make sure all SVG files
         // used in the current theme are served properly.

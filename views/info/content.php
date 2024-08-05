@@ -24,6 +24,7 @@
  *
  * @var array $viewbag
  */
+// phpcs:disable moodle.Commenting.MissingDocblock.File
 
 defined('MOODLE_INTERNAL') || die();
 ?>
