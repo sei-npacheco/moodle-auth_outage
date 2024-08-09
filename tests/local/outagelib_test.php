@@ -14,15 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * outagelib_test test class.
- *
- * @package     auth_outage
- * @author      Daniel Thee Roperto <daniel.roperto@catalyst-au.net>
- * @copyright   2016 Catalyst IT
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 namespace auth_outage\local;
 
 use auth_outage\dml\outagedb;
@@ -361,7 +352,7 @@ EOT;
      * Test create maintenance php code without age
      *
      * @param string $configkey The key of the config.
-     * @dataProvider test_createmaintenancephpcode_withoutage_provider
+     * @dataProvider createmaintenancephpcode_withoutage_provider
      */
     public function test_createmaintenancephpcode_withoutage($configkey) {
         global $CFG;
@@ -414,7 +405,11 @@ EOT;
         self::assertSame($found, $expected);
     }
 
-    public function test_createmaintenancephpcode_withoutage_provider(): array {
+    /**
+     * Provides values to test_createmaintenancephpcode_withoutage
+     * @return array
+     */
+    public static function createmaintenancephpcode_withoutage_provider(): array {
         return [['allowedips'], ['allowedips_forced']];
     }
 

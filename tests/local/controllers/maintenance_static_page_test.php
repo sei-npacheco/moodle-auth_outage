@@ -199,26 +199,27 @@ class maintenance_static_page_test extends \auth_outage\base_testcase {
      * Data provider for test_update_inline_background_images
      * @return array
      */
-    public function test_update_inline_background_images_provider() {
+    public static function update_inline_background_images_provider(): array {
         return [
             // Empty string.
             ["", false],
             // URLs that should be retrieved.
             ["color: #FF00FF; background: lightblue url(/pluginfile.php/1/theme_custom/banner/251298630/0001.png) no-repeat", true],
-            ["background: lightblue url(https://www.example.com/moodle/pluginfile.php/1/theme_custom/banner/251298630/0001.png) no-repeat", true],
+            ["background: lightblue
+                url(https://www.example.com/moodle/pluginfile.php/1/theme_custom/banner/251298630/0001.png) no-repeat", true],
             ["background:url('https://www.example.com/moodle/pluginfile.php/1/theme_custom/banner/251298630/0001.png')", true],
             ["background-image : url( /pix/help.png);", true],
             ["background-image: url ('/pix/help.png')", true],
             // URLs that should not be retrieved.
             ["background-image:url(data:image/gif;base64,R0lGODlhYADIAP=)", false],
-            ["background-image:url('data:image/gif;base64,R0lGODlhYADIAP=')", false]
+            ["background-image:url('data:image/gif;base64,R0lGODlhYADIAP=')", false],
         ];
     }
 
     /**
      * Tests update_inline_background_images() method to update the background images.
      *
-     * @dataProvider test_update_inline_background_images_provider
+     * @dataProvider update_inline_background_images_provider
      * @param string $stylecontent Content of the style to test
      * @param bool $rewrite Flag if URL should be rewritten
      * @throws coding_exception
@@ -372,14 +373,14 @@ class maintenance_static_page_test extends \auth_outage\base_testcase {
     /**
      * Return array of url data provider and true or false.
      */
-    public function is_url_dataprovider() {
+    public static function is_url_dataprovider(): array {
         return [
             [true, 'http://catalyst.net.nz'],
             [true, 'https://www.catalyst-au.net/'],
             [false, '/homepage'],
             [false, 'file://homepage'],
             [true, '//catalyst-au.net/img/test.jpg'],
-            [false, '://www.catalyst-au.net/img/test.jpg']
+            [false, '://www.catalyst-au.net/img/test.jpg'],
         ];
     }
 
@@ -560,7 +561,7 @@ class maintenance_static_page_test extends \auth_outage\base_testcase {
      * Data provider for test_get_urls_from_stylesheet
      * @return array
      */
-    public function test_get_urls_from_stylesheet_provider() {
+    public static function get_urls_from_stylesheet_provider(): array {
         return [
             // Empty string.
             ["", 0],
@@ -582,7 +583,7 @@ class maintenance_static_page_test extends \auth_outage\base_testcase {
     /**
      * Tests get_urls_from_stylesheet() method to get all appropriate URLS from the file.
      *
-     * @dataProvider test_get_urls_from_stylesheet_provider
+     * @dataProvider get_urls_from_stylesheet_provider
      * @param string $filecontent Content of the file
      * @param int $count Expected quantity of found URLs
      * @throws coding_exception

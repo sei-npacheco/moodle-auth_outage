@@ -14,15 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * edit class.
- *
- * @package    auth_outage
- * @author     Daniel Thee Roperto <daniel.roperto@catalyst-au.net>
- * @copyright  2016 Catalyst IT
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 namespace auth_outage\form\outage;
 
 use auth_outage\local\outage;
@@ -166,7 +157,7 @@ class edit extends moodleform {
             if (array_key_exists('auth_outage', $CFG->forced_plugin_settings)
                 && array_key_exists('default_autostart', $CFG->forced_plugin_settings['auth_outage'])) {
                 $this->_form->setDefaults([
-                    'autostart' => $CFG->forced_plugin_settings['auth_outage']['default_autostart']
+                    'autostart' => $CFG->forced_plugin_settings['auth_outage']['default_autostart'],
                 ]);
                 $mform->freeze('autostart');
             }

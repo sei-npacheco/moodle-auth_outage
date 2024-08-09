@@ -22,6 +22,7 @@
  * @copyright  2016 Catalyst IT
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+// phpcs:disable moodle.Commenting.MissingDocblock.File
 
 use auth_outage\output\manage\history_table;
 use auth_outage\output\manage\planned_table;

@@ -14,15 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * clibase class.
- *
- * @package    auth_outage
- * @author     Daniel Thee Roperto <daniel.roperto@catalyst-au.net>
- * @copyright  2016 Catalyst IT
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 namespace auth_outage\local\cli;
 
 use auth_outage\local\outagelib;
@@ -50,10 +41,10 @@ abstract class clibase {
 
     /**
      * clibase constructor.
-     * @param array $options The parameters to use.
+     * @param array|null $options The parameters to use.
      * @throws cli_exception
      */
-    public function __construct(array $options = null) {
+    public function __construct(?array $options = null) {
         global $CFG;
         require_once($CFG->libdir.'/clilib.php');
 

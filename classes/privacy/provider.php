@@ -13,20 +13,14 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+namespace auth_outage\privacy;
+
 /**
  * Privacy Subsystem implementation for auth_outage.
  *
  * @package    auth_outage
  * @copyright  2018 Olivier SECRET <olivier.secret@catalyst-au.net>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
-namespace auth_outage\privacy;
-
-/**
- * Privacy provider for the authentication manual.
- *
- * @copyright  2018 Carlos Escobedo <carlos@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements
@@ -41,7 +35,7 @@ class provider implements
      *
      * @return  string
      */
-    public static function get_reason() : string {
+    public static function get_reason(): string {
         return 'privacy:no_data_reason';
     }
 

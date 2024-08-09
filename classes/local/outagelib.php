@@ -14,20 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * outagelib class.
- *
- * @package    auth_outage
- * @author     Daniel Thee Roperto <daniel.roperto@catalyst-au.net>
- * @copyright  2016 Catalyst IT
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 namespace auth_outage\local;
 
 use auth_outage\dml\outagedb;
 use auth_outage\local\controllers\maintenance_static_page;
-use auth_outage\output\renderer;
 use coding_exception;
 use curl;
 use Exception;
@@ -36,7 +26,6 @@ use invalid_parameter_exception;
 use stdClass;
 
 defined('MOODLE_INTERNAL') || die();
-
 require_once(__DIR__.'/../../lib.php');
 
 /**
