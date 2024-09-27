@@ -321,10 +321,10 @@ if ((time() >= {{STARTTIME}}) && (time() < {{STOPTIME}})) {
 
     $ipblocked = !remoteip_in_list('{{ALLOWEDIPS}}');
     $accesskeyblocked = $useraccesskey != '{{ACCESSKEY}}';
-    $blocked = ({{USEACCESSKEY}} && $accesskeyblocked) || ({{USEALLOWEDIPS}} && $ipblocked);
+    $allowed = ({{USEACCESSKEY}} && !$accesskeyblocked) || ({{USEALLOWEDIPS}} && !$ipblocked);
     $isphpunit = defined('PHPUNIT_TEST');
 
-    if ($blocked) {
+    if (!$allowed) {
         if (!$isphpunit) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 503 Moodle under maintenance');
             header('Status: 503 Moodle under maintenance');
@@ -347,17 +347,9 @@ if ((time() >= {{STARTTIME}}) && (time() < {{STOPTIME}})) {
         if ({{USEALLOWEDIPS}} && $ipblocked) {
             echo '<!-- Blocked by ip, your ip: '.getremoteaddr('n/a').' -->';
         }
-        
-        if ({{USEALLOWEDIPS}} && !$ipblocked) {
-            echo '<!-- Your IP is allowed: '.getremoteaddr('n/a').' -->';
-        }
 
         if ({{USEACCESSKEY}} && $accesskeyblocked) {
             echo '<!-- Blocked by missing or incorrect access key, access key given: '. $useraccesskey .' -->';
-        }
-
-        if ({{USEACCESSKEY}} && !$accesskeyblocked) {
-            echo '<!-- Your access key is allowed: '. $useraccesskey .' -->';
         }
 
         if (!$isphpunit) {

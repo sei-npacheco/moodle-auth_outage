@@ -335,10 +335,10 @@ if ((time() >= 123) && (time() < 456)) {
 a.b.c.d
 e.e.e.e/20');
     $accesskeyblocked = $useraccesskey != '12345';
-    $blocked = (true && $accesskeyblocked) || (true && $ipblocked);
+    $allowed = (true && !$accesskeyblocked) || (true && !$ipblocked);
     $isphpunit = defined('PHPUNIT_TEST');
 
-    if ($blocked) {
+    if (!$allowed) {
         if (!$isphpunit) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 503 Moodle under maintenance');
             header('Status: 503 Moodle under maintenance');
@@ -361,17 +361,9 @@ e.e.e.e/20');
         if (true && $ipblocked) {
             echo '<!-- Blocked by ip, your ip: '.getremoteaddr('n/a').' -->';
         }
-        
-        if (true && !$ipblocked) {
-            echo '<!-- Your IP is allowed: '.getremoteaddr('n/a').' -->';
-        }
 
         if (true && $accesskeyblocked) {
             echo '<!-- Blocked by missing or incorrect access key, access key given: '. $useraccesskey .' -->';
-        }
-
-        if (true && !$accesskeyblocked) {
-            echo '<!-- Your access key is allowed: '. $useraccesskey .' -->';
         }
 
         if (!$isphpunit) {
@@ -422,10 +414,10 @@ if ((time() >= 123) && (time() < 456)) {
 
     $ipblocked = !remoteip_in_list('127.0.0.1');
     $accesskeyblocked = $useraccesskey != '5678';
-    $blocked = (true && $accesskeyblocked) || (true && $ipblocked);
+    $allowed = (true && !$accesskeyblocked) || (true && !$ipblocked);
     $isphpunit = defined('PHPUNIT_TEST');
 
-    if ($blocked) {
+    if (!$allowed) {
         if (!$isphpunit) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 503 Moodle under maintenance');
             header('Status: 503 Moodle under maintenance');
@@ -448,17 +440,9 @@ if ((time() >= 123) && (time() < 456)) {
         if (true && $ipblocked) {
             echo '<!-- Blocked by ip, your ip: '.getremoteaddr('n/a').' -->';
         }
-        
-        if (true && !$ipblocked) {
-            echo '<!-- Your IP is allowed: '.getremoteaddr('n/a').' -->';
-        }
 
         if (true && $accesskeyblocked) {
             echo '<!-- Blocked by missing or incorrect access key, access key given: '. $useraccesskey .' -->';
-        }
-
-        if (true && !$accesskeyblocked) {
-            echo '<!-- Your access key is allowed: '. $useraccesskey .' -->';
         }
 
         if (!$isphpunit) {
@@ -679,12 +663,11 @@ EOT;
      * @return array
      */
     public static function evaluation_maintenancepage_provider(): array {
-        $allowedipout = '<!-- Your IP is allowed:';
         $blockedipout = '<!-- Blocked by ip, your ip:';
-        $allowedaccesskeyout = '<!-- Your access key is allowed:';
         $blockedaccesskeyout = '<!-- Blocked by missing or incorrect access key, access key given:';
 
         return [
+            // IP set up, access key not set up.
             'ip allowed, no access key setup' => [
                 'allowedips' => '127.0.0.1',
                 'iptouse' => '127.0.0.1',
@@ -699,6 +682,7 @@ EOT;
                 'accesskeytouse' => null,
                 'expectedoutputs' => [$blockedipout],
             ],
+            // IP not set up, access key set up.
             'access key incorrect, no ip setup' => [
                 'allowedips' => null,
                 'iptouse' => null,
@@ -713,19 +697,27 @@ EOT;
                 'accesskeytouse' => '12345',
                 'expectedoutputs' => [],
             ],
+            // Both IP and access key set up.
+            'access key incorrect, ip incorrect' => [
+                'allowedips' => '127.0.0.1',
+                'iptouse' => '5.5.5.5',
+                'accesskey' => '12345',
+                'accesskeytouse' => 'wrong',
+                'expectedoutputs' => [$blockedipout, $blockedaccesskeyout],
+            ],
             'access key correct, ip incorrect' => [
                 'allowedips' => '127.0.0.1',
                 'iptouse' => '5.5.5.5',
                 'accesskey' => '12345',
                 'accesskeytouse' => '12345',
-                'expectedoutputs' => [$allowedaccesskeyout, $blockedipout],
+                'expectedoutputs' => [],
             ],
             'access key incorrect, ip correct' => [
                 'allowedips' => '127.0.0.1',
                 'iptouse' => '127.0.0.1',
                 'accesskey' => '12345',
                 'accesskeytouse' => 'wrong',
-                'expectedoutputs' => [$blockedaccesskeyout, $allowedipout],
+                'expectedoutputs' => [],
             ],
             'access key correct, ip correct' => [
                 'allowedips' => '127.0.0.1',
