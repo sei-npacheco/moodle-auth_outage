@@ -98,7 +98,7 @@ class maintenance_static_page_test extends \auth_outage\base_testcase {
      * Test remove script tags.
      */
     public function test_updatelinkstylesheet() {
-        $localcsslink = $this->get_fixture_path('simple.css');
+        $localcsslink = $this->get_fixture_path_location('simple.css');
         $externalcsslink = 'http://google.com/coolstuff.css';
         $html = "<!DOCTYPE html>\n".
                 '<html><head><link href="'.$localcsslink.'" rel="stylesheet" /><title>Title</title></head>'.
@@ -114,7 +114,7 @@ class maintenance_static_page_test extends \auth_outage\base_testcase {
      * Test update link style sheet urls.
      */
     public function test_updatelinkstylesheet_urls() {
-        $localcsslink = $this->get_fixture_path('withurls.css');
+        $localcsslink = $this->get_fixture_path_location('withurls.css');
         $html = "<!DOCTYPE html>\n".
                 '<html><head><link href="'.$localcsslink.'" rel="stylesheet" /><title>Title</title></head>'.
                 '<body>Content</body></html>';
@@ -132,7 +132,7 @@ class maintenance_static_page_test extends \auth_outage\base_testcase {
      * Test update link style sheet urls quoted.
      */
     public function test_updatelinkstylesheet_urls_quoted() {
-        $localcsslink = $this->get_fixture_path('withurls-quoted.css');
+        $localcsslink = $this->get_fixture_path_location('withurls-quoted.css');
         $html = "<!DOCTYPE html>\n".
                 '<html><head><link href="'.$localcsslink.'" rel="stylesheet" /><title>Title</title></head>'.
                 '<body>Content</body></html>';
@@ -150,7 +150,7 @@ class maintenance_static_page_test extends \auth_outage\base_testcase {
      * Test update link style sheet urls with sub dir.
      */
     public function test_updatelinkstylesheet_urls_subdir() {
-        $localcsslink = $this->get_fixture_path('subdir/withurls-subdir.css');
+        $localcsslink = $this->get_fixture_path_location('subdir/withurls-subdir.css');
         $html = "<!DOCTYPE html>\n".
                 '<html><head><link href="'.$localcsslink.'" rel="stylesheet" /><title>Title</title></head>'.
                 '<body>Content</body></html>';
@@ -168,7 +168,7 @@ class maintenance_static_page_test extends \auth_outage\base_testcase {
       * Test update images to file.php style link.
       */
     public function test_updateimages() {
-        $localimglink = $this->get_fixture_path('catalyst.png');
+        $localimglink = $this->get_fixture_path_location('catalyst.png');
         $externalimglink = 'http://google.com/coolstyle.css';
         $html = "<!DOCTYPE html>\n".
                 '<html><head><title>Title</title></head>'.
@@ -184,7 +184,7 @@ class maintenance_static_page_test extends \auth_outage\base_testcase {
       * Test update favicon to file.php style link.
       */
     public function test_updatelinkfavicon() {
-        $link = $this->get_fixture_path('catalyst.png');
+        $link = $this->get_fixture_path_location('catalyst.png');
         $html = "<!DOCTYPE html>\n".
                 '<html><head><title>Title</title><link rel="shortcut icon" href="'.$link.'""></head>'.
                 '<body>Content</body></html>';
@@ -253,7 +253,7 @@ class maintenance_static_page_test extends \auth_outage\base_testcase {
       * Test update preview path to file.php style link.
       */
     public function test_previewpath() {
-        $link = $this->get_fixture_path('catalyst.png');
+        $link = $this->get_fixture_path_location('catalyst.png');
         $html = "<!DOCTYPE html>\n".
                 '<html><head><title>Title</title><link rel="shortcut icon" href="'.$link.'""></head>'.
                 '<body>Content</body></html>';
@@ -313,7 +313,7 @@ class maintenance_static_page_test extends \auth_outage\base_testcase {
     public function test_createdfile() {
         global $CFG;
 
-        $link = $this->get_fixture_path('catalyst.png');
+        $link = $this->get_fixture_path_location('catalyst.png');
         $html = "<!DOCTYPE html>\n".
                 '<html><head><title>Title</title></head>'.
                 '<body>Content<img src="'.$link.'" /></body></html>';
@@ -337,7 +337,7 @@ class maintenance_static_page_test extends \auth_outage\base_testcase {
      *
      * @return string
      */
-    private function get_fixture_path($file) {
+    private function get_fixture_path_location($file) {
         return (string)new \moodle_url('/auth/outage/tests/local/controllers/fixtures/'.$file);
     }
 
