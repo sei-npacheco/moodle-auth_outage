@@ -192,6 +192,8 @@ Note: these restrictions build on each other; If both are enabled, users must me
 Only allow users from a certain IP or range of ips to enter.
 ## Access key
 Users provide an access key in the URL params on first page load, which is then stored as a cookie for 24 hours. If the access key matches the one setup for the outage, they are allowed in.
+## Using IP restriction with access key
+Users will be allowed if they are from the configured allowed ips OR if they provide the correct access key.
 
 
 Feedback and issues
